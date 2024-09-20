@@ -6,10 +6,9 @@ package:
   version: {{ version }}
 
 source:
+  # Use GH for upstream tests
   url: https://github.com/googleads/google-ads-python/archive/refs/tags/{{ version }}.tar.gz
   sha256: 5ebf11c13f4761b5f73eb39187c2d41eee2d81334936c3a646be41b2112ad9c8
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  #sha256: 15c7a5953f70c52054020bc70426b2963ebf5ab1486912d802de17d7af40989b
 
 build:
   number: 0
