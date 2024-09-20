@@ -6,12 +6,14 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 15c7a5953f70c52054020bc70426b2963ebf5ab1486912d802de17d7af40989b
+  url: https://github.com/googleads/google-ads-python/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 5ebf11c13f4761b5f73eb39187c2d41eee2d81334936c3a646be41b2112ad9c8
+  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  #sha256: 15c7a5953f70c52054020bc70426b2963ebf5ab1486912d802de17d7af40989b
 
 build:
   number: 0
-  skip: True                            # [not (py>=38 and py<313)]
+  skip: True                            # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -36,9 +38,14 @@ test:
     - google
     - google.ads
   commands:
+    - rm tests/config_test.py tests/client_test.py
     - pip check
+    - python -m unittest discover --buffer -s tests -p "*_test.py"
   requires:
     - pip
+    - python
+  source_files:
+    - tests
 
 about:
   home: https://github.com/googleads/google-ads-python
